@@ -3,9 +3,11 @@ IR remote control can be used for
 * controlling Home Assistant
 * let Home Assistant your devices that usually would be controlled via a IR remote. 
 
+See also:  [Original remote receiver docs](https://esphome.io/components/remote_receiver/)
+
+
 ## Get to know your remote
 
-[Original remote receiver docs](https://esphome.io/components/remote_receiver/)
 Different vendors use various command protocols for IR remotes. Luckily, most of them are known and can be decoded easily to listen for them, or later send our own commands.
 
 ### Setup
@@ -45,7 +47,7 @@ The first line has the raw IR codes (which we could use but are cumbersome). Mor
 
 Let's now only listen to the SONY protocol and create a binary sensor entity for HA to trigger automations with the IR remote.
 
-```
+```yaml
 remote_receiver:
   pin: 
     number: GPIO5
@@ -90,7 +92,7 @@ Different IR remotes might have different expected formats. Here is another exam
 
 It sends multiple command formats at once. Let's configure it to additionally listen for the NEC command:
 
-```
+```yaml
 remote_receiver:
   pin: 
     number: GPIO5
@@ -125,7 +127,7 @@ Here it how it looks like on the Home Assistant side:
 
 ![Home Assistant Entity for power button](images/ha_ir_binary_sensor.png)
 
-![KY-22 IR Remote Sensor wired up connected to GPIO5 on the ESP32 C3 Supermini](image.png)
+![KY-22 IR Remote Sensor wired up connected to GPIO5 on the ESP32 C3 Supermini]()
 
 ##  Adding an IR Sender
 For IR control of devices using Home Assistant (e.g. for turning on a TV from HA) we need an IR transmitting diode module.
@@ -144,7 +146,7 @@ Your module has 3 pins. Connect them as follows
 
 Add the following configuration
 
-``` 
+```yaml
 remote_transmitter:
   pin: GPIO6
   carrier_duty_percent: 50%
