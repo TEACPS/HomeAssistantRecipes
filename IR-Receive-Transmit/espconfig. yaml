@@ -1,0 +1,66 @@
+esphome:
+  name: c3supermini
+  friendly_name: C3Supermini
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  - platform: esphome
+
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+#### Configuration for IR remote control ####
+# Also see https://esphome.io/components/remote_transmitter/
+#          https://esphome.io/components/remote_receiver/
+
+remote_receiver:
+  pin: 
+    number: GPIO5
+    # Sony remote needed inverted signal
+    inverted: True
+  dump: all
+
+
+remote_transmitter:
+  pin: GPIO6
+  carrier_duty_percent: 50%
+
+
+button:
+  - platform: template
+    name: "Sony Power"
+    on_press:
+      - repeat:
+          count: 8
+          then: 
+          - remote_transmitter.transmit_sony:
+              data: 0xA90
+              nbits: 12
+          - delay: 40ms
+
+  - platform: template
+    name: "Sony Volume Up"
+    on_press:
+      - remote_transmitter.transmit_sony:
+          data: 0x290
+          nbits: 12
+
+  - platform: template
+    name: "Sony Volume Down"
+    on_press:
+      - remote_transmitter.transmit_sony:
+          data: 0xC90
+          nbits: 12
+
