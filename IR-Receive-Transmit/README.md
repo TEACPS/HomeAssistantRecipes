@@ -1,7 +1,12 @@
 # IR Remote Receiver and Transmitter
-IR remote control can be used for 
-* controlling Home Assistant
-* let Home Assistant your devices that usually would be controlled via a IR remote. 
+
+IR remote control can be used to control regular devices that come with an IR remote control (like TVs, air conditions, etc.) directly from home assistant. 
+
+Here we'll show how to 
+* receive IR commands from an existing remote (e.g. for analysing the commands used) using an IR receiver module (KY-22)
+* let Home Assistant your devices that usually would be controlled via a IR remote using an IR LED module.
+
+ToDo: ![photo of the KY-22 type receiver module and an IR LED transmitter]() 
 
 See also:  [Original remote receiver docs](https://esphome.io/components/remote_receiver/)
 
@@ -127,11 +132,12 @@ Here it how it looks like on the Home Assistant side:
 
 ![Home Assistant Entity for power button](images/ha_ir_binary_sensor.png)
 
-![KY-22 IR Remote Sensor wired up connected to GPIO5 on the ESP32 C3 Supermini]()
+ToDo: ![KY-22 IR Remote Sensor wired up connected to GPIO5 on the ESP32 C3 Supermini]()
 
 ##  Adding an IR Sender
 For IR control of devices using Home Assistant (e.g. for turning on a TV from HA) we need an IR transmitting diode module.
 
+See also: [Original IR Transmitter docs](https://esphome.io/components/remote_transmitter/)
 
 
 ### Setup
@@ -161,10 +167,17 @@ button:
           - remote_transmitter.transmit_sony:   # send a sony IR command
               data: 0xA90
               nbits: 12
-          - delay: 40ms
+          - delay: 40ms   # delay between repetitions
 ```
 
-This will setup the IR diode for transmission. The `button` entity will create a pressable button in Home Assistant, which will send the specified IR command. Sometimes it is necessary to send it multiple times. The `on_press` automation therefore has a `repeat` statement which repeats sending the code.
+This will setup the IR diode for transmission. The `button` entity will create a pressable button in Home Assistant, which will send the specified IR command. Sometimes it is necessary to send it multiple times for the devices to pick up the command. The `on_press` automation therefore has a `repeat` statement which repeats sending the code `count` times.
 
 #### Note:
-Depending on the IR-diode power supply the sent IR code might not be as strong as a handheld remote. Try moving closer to the receiving device if the command is not picked up. Another option would be to use the 5V power supply for a stronger illumination.
+Depending on the IR-diode power supply the sent IR code might not be as strong as a handheld remote. Try moving closer to the receiving device if the command is not picked up. Another option would be to use the 5V power supply on the IR diode for a stronger illumination.
+
+
+## Note regarding parallel use of IR and adressable LEDs
+
+To generate the signals for the IR remote, most ESP32 chip have an internal hardware RMT (=remote) module. It can generate coded waveforms signals without putting too much pressure on the CPU. However, if multiple instances want to use this module you might run into a conflict. An example would be the use of addressable leds using the [ESP32 Adressable LED Strip](https://esphome.io/components/light/esp32_rmt_led_strip/) that also uses the RMT to generate the codes for the LEDs. 
+
+In short: You cannot use the IR transmitter and the LED strips at the same time!
