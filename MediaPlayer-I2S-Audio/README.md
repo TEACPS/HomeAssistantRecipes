@@ -1,23 +1,31 @@
 # Media Player using I2S Audio
 
-A neat feature of the HA and ESPHome environment is audio playback directly from the chip. The media player framework allows for playing back from different sources like webstreams or even short audio snippets stored on the ESP directly.
+A neat feature of the HA and ESPHome environment is audio playback directly from the chip. The media player framework allows for playing back from different sources like web-radios or even short audio snippets stored on the ESP directly (not demoed here).
 
-Here we'll use an I2S audio amplifier chip to drive a little speaker and playback a webstream. I2S is a serial protocol for audio streams among chips. The ESP32 generates this audio stream and using I2S it is transmitted to the amplifier, where it is 
+Here we'll use an I2S audio amplifier chip to drive a little speaker and playback a webstream. *I2S* is a serial protocol for audio streams among chips. The ESP32 generates this audio stream and using I2S it is transmitted to the amplifier, where it is made audible.
+
+![Setup with I2S amplifier module and speaker](media/i2s-audio-connected-top.jpg)
+
+See also 
+* [Original I2S audio speaker component docs](https://esphome.io/components/speaker/i2s_audio/).
+* [Original speaker component docs](https://esphome.io/components/speaker/)
+* [Original media player component docs](https://esphome.io/components/media_player/)
+
 
 ### Note regarding processing power
 
-The ESP32-C3 chip is rather limited in memory and processing ressources and probably cannot use all features of the media player framework reliably (like audio mixing). For more processing power, switch e.g. to en ESP32-S3 chip. 
+The ESP32-C3 chip is rather limited in memory and processing ressources and probably cannot use all features of the media player framework reliably (like audio mixing). For more processing power, switch e.g. to an ESP32-S3 chip. This tutorial will therefore cover a very basic use case.
 
 
 ## Setup
-Apart from the power connection, we need to setup I2S, which requires 3 lines: LRCLK, BCLK and DATA
+Apart from the power connection, we need to setup I2S, which requires 3 lines: `LRCLK`, `BCLK` and `DATA`
 
-* VIN to 5V of the ESP
+* `VIN` to 5V
 * GND to GND
 * I2S
-  * LRCLK to `GPIO5`
-  * BRCLK to `GPIO6`
-  * DIN to `GPIO7`
+  * `LRCLK` to `GPIO5`
+  * `BRCLK` to `GPIO6`
+  * `DIN` to `GPIO7`
 
 ## Configuration
 
