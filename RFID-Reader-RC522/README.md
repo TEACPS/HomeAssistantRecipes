@@ -7,6 +7,8 @@ RFID tags can be used in different ways with Home Assistant and ESPHome. Tag han
 
 This tutorial explores the simple usecase of a RFID reader scanning tags.
 
+See also: [Original RC522 component docs](https://esphome.io/components/binary_sensor/rc522/)
+
 ## Setup
 The RC522 module uses the SPI bus communicating with the ESP. 
 

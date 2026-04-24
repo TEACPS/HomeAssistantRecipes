@@ -10,7 +10,7 @@ This tutorial guides your through how to
 
 ![photo of the MPR121 capacitive touch sensor module](media/mpr121-module.jpg) 
 
-See also:  [Original MPR121 ESPHome docs](https://esphome.io/components/binary_sensor/mpr121/)
+See also:  [Original MPR121 component docs](https://esphome.io/components/binary_sensor/mpr121/)
 
 #### Note about capacitive sensing
 Sensitivity depends on a number of factors, among them the size of the conductive area which are connected to the channel. 
@@ -25,8 +25,8 @@ Your module has 3 pins. Connect them as follows
 
 * GND to GND
 * VIN to 3.3V
-* SDA to any capable port. In this example we'll use `GPIO5`
-* SCL to any capable GPIO. In this example we'll use `GPIO6`
+* `SDA` to any capable port. In this example we'll use `GPIO5`
+* `SCL` to any capable GPIO. In this example we'll use `GPIO6`
 
 ![Connected MPR121 module](media/capsense-module-connected.jpg)
 

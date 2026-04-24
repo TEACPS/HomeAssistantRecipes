@@ -1,5 +1,5 @@
 # Accellerometer and Gyroscope
-An accellerometer is a sensor to measure movements and pose (using earths gravity as accelleration). The inexpensive GY-521 modules use a MPU6050 chip which provides accellerometer, a gyroscope for measuring rotating movements and a thermometer. This chip is quite cheap and therefore the measured values are not exceptionally precise (but good enough for simple detections).
+An accellerometer is a sensor to measure movements and pose (using earths gravity as accelleration). The inexpensive *GY-521* modules use a *MPU6050* chip which provides accellerometer, a gyroscope for measuring rotating movements and a thermometer. This chip is quite cheap and therefore the measured values are not exceptionally precise (but good enough for simple detections).
 
 Here we'll show how to 
 
@@ -8,7 +8,7 @@ Here we'll show how to
 
 ![photo of the GY-521 Accellerometer and Gyroscope module](media/accel-gyro-modules.jpg) 
 
-See also:  [Original remote receiver docs](https://esphome.io/components/sensor/mpu6050/)
+See also:  [Original MPU6050 component docs](https://esphome.io/components/sensor/mpu6050/)
 
 
 ## Setup
@@ -19,8 +19,8 @@ Your module has 3 pins. Connect them as follows
 
 * GND to GND
 * VIN to 3.3V
-* SDA to any capable port. In this example we'll use `GPIO5`
-* SCL to any capable GPIO. In this example we'll use `GPIO6`
+* `SDA` to any capable port. In this example we'll use `GPIO5`
+* `SCL` to any capable GPIO. In this example we'll use `GPIO6`
 
 ![Connected GY-521 module](media/accel-gyro-connected-front.jpg)
 

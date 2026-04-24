@@ -7,7 +7,7 @@ Here we'll show how to
 
 ![photo of the vl53l0x lidar distance sensor](media/vl53l0x-modules.jpg) 
 
-See also:  [Original remote receiver docs](https://esphome.io/components/sensor/vl53l0x/)
+See also:  [Original vl53l0x component docs](https://esphome.io/components/sensor/vl53l0x/)
 
 #### Note about distance
 The quality of the distance measurements is limited by the reflectivity of the measured surface. Depending this measuements are possible from a few centimeters up to 2 meters. From experience, reliable results are possible within 80cm but be sure to test it for your application.

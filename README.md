@@ -17,11 +17,11 @@ Scope of this registry is to provide basic working setup examples for several se
 
 * [Lidar Distance Sensor](Lidar-Distance/README.md)
 * [Accellerometer and Gyroscope](Accel-Gyro-MPU6050/README.md)
-* [Capacitive Touch Sensor](CapacitiveTouch-MPR121/README.md)
+* [Capacitive Touch Sensor MPR121](CapacitiveTouch-MPR121/README.md)
 
 ### SPI based modules
 
-* [RFID Reader](RFID-Reader/README.md)
+* [RFID Reader](RFID-Reader-RC522/README.md)
 
 ### Miscellaneous modules
 * [DHT-type Temperature and Humidity Senor](Temperature-Humidity-DHT/README.md)
