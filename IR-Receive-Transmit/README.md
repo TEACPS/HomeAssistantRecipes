@@ -2,11 +2,12 @@
 
 IR remote control can be used to control regular devices that come with an IR remote control (like TVs, air conditions, etc.) directly from home assistant. 
 
+![photo of the KY-22 type receiver module and an IR LED transmitter](media/IR-modules-front.jpg) 
+
 Here we'll show how to 
 * receive IR commands from an existing remote (e.g. for analysing the commands used) using an IR receiver module (KY-22)
 * let Home Assistant your devices that usually would be controlled via a IR remote using an IR LED module.
 
-ToDo: ![photo of the KY-22 type receiver module and an IR LED transmitter]() 
 
 See also:  [Original remote receiver docs](https://esphome.io/components/remote_receiver/)
 
@@ -21,6 +22,8 @@ Your module has 3 pins. Connect them as follows
 * **-** for GND
 * (middle pin) for connection with 3.3V
 * **S** for connection with the GPIO of the board. In this example we'll use `GPIO5`
+
+![IR module connection](media/IR-send-receive-connected.jpg)
 
 ### ESPHome config
 Connect as stated above and then configure like shown here:  
@@ -147,6 +150,7 @@ Your module has 3 pins. Connect them as follows
 * (middle pin) for connection with 3.3V
 * **S** for connection with the GPIO of the board. In this example we'll use `GPIO6`
 
+(also see foto on top of this page)
 
 ### Sending IR codes from Home Assistant
 
@@ -178,6 +182,6 @@ Depending on the IR-diode power supply the sent IR code might not be as strong a
 
 ## Note regarding parallel use of IR and adressable LEDs
 
-To generate the signals for the IR remote, most ESP32 chip have an internal hardware RMT (=remote) module. It can generate coded waveforms signals without putting too much pressure on the CPU. However, if multiple instances want to use this module you might run into a conflict. An example would be the use of addressable leds using the [ESP32 Adressable LED Strip](https://esphome.io/components/light/esp32_rmt_led_strip/) that also uses the RMT to generate the codes for the LEDs. 
+To generate the signals for the IR remote, most ESP32 chip have an internal hardware RMT (=remote) module. It can generate coded waveforms signals without putting too much pressure on the CPU. However, if multiple instances want to use this module you might run into a conflict. An example would be the use of addressable leds using the [ESP32 RMT Adressable LED Strip](https://esphome.io/components/light/esp32_rmt_led_strip/) that also uses the RMT to generate the codes for the LEDs. 
 
-In short: You cannot use the IR transmitter and the LED strips at the same time!
+**In short: You cannot use the IR transmitter and the LED strips at the same time!**

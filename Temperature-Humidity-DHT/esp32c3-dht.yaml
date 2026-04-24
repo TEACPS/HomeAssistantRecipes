@@ -1,0 +1,44 @@
+esphome:
+  name: esp32c3-dht
+  friendly_name: esp32c3-dht
+
+esp32:
+  board: nologo_esp32c3_super_mini
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Esp32C3-Dht Fallback Hotspot"
+    password: "lA6ikNylQunk"
+
+captive_portal:
+
+
+sensor:
+  - platform: dht
+    pin: 
+      number: GPIO5
+      mode: 
+        input: true
+        pullup: true  # true for our DHT12 sensor module
+    temperature:
+      name: "Living Room Temperature"
+    humidity:
+      name: "Living Room Humidity"
+    update_interval: 5s
+    model: DHT11    # note: we are using a DHT12 sensor but it can be addressed like a DHT11

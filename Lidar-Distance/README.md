@@ -5,7 +5,7 @@ Here we'll show how to
 * wire up and configure the sensor
 * report the distance of objects to Home Assistant
 
-ToDo: ![photo of the vl53l0x lidar distance sensor]() 
+![photo of the vl53l0x lidar distance sensor](media/vl53l0x-modules.jpg) 
 
 See also:  [Original remote receiver docs](https://esphome.io/components/sensor/vl53l0x/)
 
@@ -25,6 +25,8 @@ Your module has 3 pins. Connect them as follows
 * SDA to any capable port. In this example we'll use `GPIO5`
 * SCL to any capable GPIO. In this example we'll use `GPIO6`
 
+![connected vl53l0x sensor module](media/lidar-module-top.jpg)
+
 ### ESPHome config
 Connect as stated above and then configure like shown here:  
 
@@ -42,7 +44,8 @@ sensor:
     name: "VL53L0x Distance"
     address: 0x29           # each i2c sensor has a unique, predefined address
     update_interval: 200ms  # how quickly we want our updates
-    #long_range: true```
+    #long_range: true
+```
 
 Compile and download the firmware to your ESP. After uploading make sure you have your ESP added as a Home Assistant entity.
 

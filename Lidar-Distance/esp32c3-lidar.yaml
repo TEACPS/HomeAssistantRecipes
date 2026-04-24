@@ -1,0 +1,45 @@
+esphome:
+  name: esp32c3-lidar
+  friendly_name: esp32c3-lidar
+
+esp32:
+  board: nologo_esp32c3_super_mini
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Esp32C3-Lidar Fallback Hotspot"
+    password: "kH19J3W3gsZI"
+
+captive_portal:
+    
+
+# i2c setup is needed for the vl53l0x sensor
+i2c:
+  sda: GPIO5
+  scl: GPIO6
+  #scan: true
+  id: bus_a
+
+# sensor configuration
+sensor:
+  - platform: vl53l0x
+    name: "VL53L0x Distance"
+    address: 0x29           # each i2c sensor has a unique, predefined address
+    update_interval: 200ms  # how quickly we want our updates
+    #long_range: true
+

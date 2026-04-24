@@ -77,4 +77,4 @@ By default, you will find * Google Translate* as a TTS generator there. Open it,
 ![Google TTS](media/HA-google-tts.png)
 
 ### A note about the media player channels
-The media player actually provides two pipelines: the `media_pipeline` and the `announcement_pipeline`. Due to processing constraints of the C3 chip, we can only use one pipeline at a time. The example above therefore uses the  `announcement_pipeline` both for media playback and announcements and an announcement interrupts media playback.
+The media player actually provides two pipelines: the `media_pipeline` and the `announcement_pipeline`. Due to processing constraints of the C3 chip, we can only use one pipeline at a time. The example above therefore uses the  `announcement_pipeline` both for media playback AND announcements. Therefore, an announcement interrupts media playback.

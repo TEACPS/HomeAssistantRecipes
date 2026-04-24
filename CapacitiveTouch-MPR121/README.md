@@ -1,18 +1,19 @@
 # MPR121 Capacitive Touch sensor module
 
-The MPR121 is a specialised sensor module for capacitive sensing with 12 inputs. Capacitive sensing can be used for binary touch input or even proximity sensing (without touching). While many ESP32s also have touch-sensors built in in some of their GPIOs, the MPR121 is superior when it comes to sensitivity and configurability.
+The MPR121 is a specialised sensor module for capacitive sensing with 12 inputs. Capacitive sensing can be used for binary touch input or even proximity sensing (without touching). While many ESP32s also have touch-sensors built in in some of their GPIOs, the MPR121 is superior when it comes to sensitivity and configurability and offers 12 channels (possible connections).
 
-Here we'll show how to 
+This tutorial guides your through how to
+
 * wire up and configure the sensor
 * make touchable elements (binary)
 
 
-ToDo: ![photo of the MPR121 capacitive touch sensor module]() 
+![photo of the MPR121 capacitive touch sensor module](media/mpr121-module.jpg) 
 
 See also:  [Original MPR121 ESPHome docs](https://esphome.io/components/binary_sensor/mpr121/)
 
 #### Note about capacitive sensing
-TODO
+Sensitivity depends on a number of factors, among them the size of the conductive area which are connected to the channel. 
 
 ## Setup
 
@@ -26,6 +27,8 @@ Your module has 3 pins. Connect them as follows
 * VIN to 3.3V
 * SDA to any capable port. In this example we'll use `GPIO5`
 * SCL to any capable GPIO. In this example we'll use `GPIO6`
+
+![Connected MPR121 module](media/capsense-module-connected.jpg)
 
 ### ESPHome config
 Connect as stated above and then configure like shown here:  
@@ -60,6 +63,7 @@ binary_sensor:
 After configuring the `mpr121` component we need to make the data available to Home Assistant by configuring a `binary_sensor`, which uses the `mpr121` as a platform. The 12 available inputs on the module can be references using the `channel` parameter. Individual threshold settings can be applied for each channel.
 
 Before powering on your setup, connect a cable to the input of the MPR121 and leave the other end open. Then, compile and download the firmware to your ESP. After uploading make sure you have your ESP added as a Home Assistant entity.
+
 
 
 ## HA data display

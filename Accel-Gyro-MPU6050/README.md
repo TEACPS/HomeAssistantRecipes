@@ -6,14 +6,12 @@ Here we'll show how to
 * wire up and configure the sensor
 * report the accellerometer, gyroscope and temperature values to Home Assistant
 
-ToDo: ![photo of the vl53l0x lidar distance sensor]() 
+![photo of the GY-521 Accellerometer and Gyroscope module](media/accel-gyro-modules.jpg) 
 
 See also:  [Original remote receiver docs](https://esphome.io/components/sensor/mpu6050/)
 
-#### Note 
 
 ## Setup
-
 
 ### Connection
 
@@ -23,6 +21,8 @@ Your module has 3 pins. Connect them as follows
 * VIN to 3.3V
 * SDA to any capable port. In this example we'll use `GPIO5`
 * SCL to any capable GPIO. In this example we'll use `GPIO6`
+
+![Connected GY-521 module](media/accel-gyro-connected-front.jpg)
 
 ### ESPHome config
 Connect as stated above and then configure like shown here:  

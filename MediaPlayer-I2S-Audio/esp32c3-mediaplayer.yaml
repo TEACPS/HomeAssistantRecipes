@@ -1,0 +1,57 @@
+esphome:
+  name: esp32c3-mediaplayer
+  friendly_name: esp32c3_mediaplayer
+
+esp32:
+  board: nologo_esp32c3_super_mini
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Esp32C3-Mediaplayer"
+    password: "ZyjclbtvZ8yG"
+
+captive_portal:
+    
+
+i2s_audio:
+  i2s_lrclk_pin: GPIO5
+  i2s_bclk_pin: GPIO6
+
+speaker:
+  - platform: i2s_audio
+    id: my_speaker
+    dac_type: external
+    i2s_dout_pin: GPIO7
+    channel: left         # MAX98357A will output this channel
+    num_channels: 1
+    sample_rate: 16000
+    buffer_duration: 100ms   # default is 500ms, reduce to save RAM
+
+media_player:
+  - platform: speaker
+    name: "My Media Player"
+    id: my_media_player
+    announcement_pipeline:
+      speaker: my_speaker
+      format: FLAC
+      num_channels: 1
+      sample_rate: 16000
+    buffer_size: 32768    # reduced from default 1MB to fit C3's limited RAM
+    volume_initial: 0.5
+    volume_min: 0.0
+    volume_max: 1.0

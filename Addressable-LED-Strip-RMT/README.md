@@ -2,6 +2,8 @@
 
 ## Device Info
 Addressable LED Strips are a nice option to communicate info visually with colored light and require only a simple setup. We use a strip of type WS2812B, which has a 5V power and GND connection, as well as a single signal connection that carries the signal for all LEDs on the strip.
+![WS2812B LED Strip](media/ws2812b-strip.jpg)
+
 
 #### Note regarding power: 
 LEDs can consume a considerable amount of energy. The longer the LED strip, the more LEDs are in use and the power requirements increase. While for a few LEDs the power may be sources just from the ESPs USB port (which should be able to supply 500mA), for bigger setups you might require a stronger power source than the USB port (and additional info not provided here on how to wire things up).
@@ -22,7 +24,7 @@ The provided strip only has 14 LEDs, so we will use the USB supplied power of th
 * Connect the Data pin of the strip to any GPIO of the ESP. For this tutorial we'll use GPIO 2
 
 TODO
-![LED Strip Connections](media/led-strip-connection.jpg)
+[LED Strip Connections](media/ws2812b-strip-connected.jpg)
 
 
 ## Configuration
@@ -100,3 +102,5 @@ For example, the following snippet turns the light on when power is provided and
 ```
 
 ## Light Settings in Home Assistant
+
+Now explore the light in homeassistant to change colors or set an effect.

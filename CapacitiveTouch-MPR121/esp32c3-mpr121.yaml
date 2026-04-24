@@ -1,0 +1,54 @@
+esphome:
+  name: esp32c3-mpr121
+  friendly_name: esp32c3-mpr121
+
+esp32:
+  board: nologo_esp32c3_super_mini
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Esp32C3-Mpr121 Fallback Hotspot"
+    password: "nfRWyQVBNLVM"
+
+captive_portal:
+
+
+# i2c bus setup for the MPR121
+i2c:
+  sda: GPIO5
+  scl: GPIO6
+  scan: true
+  id: bus_a
+
+# basic configuration of the MPR121 component. note that this does not yet deliver any data to HA.
+mpr121:
+  id: mpr121_component
+  address: 0x5A
+  touch_debounce: 1     # optional. range is from 0-7
+  release_debounce: 1   # optional. range is from 0-7
+  touch_threshold: 10   # touch sensitivity. lower values -> more sensitive. should be between 5 and 30.
+  release_threshold: 7  # release sensitivity. release threshold should be below touch threshold
+
+# make data available in Home Assistant. here a binary sensor for channel 0 is configured.
+binary_sensor:
+  - platform: mpr121
+    id: touch_key0
+    channel: 0
+    name: "Touch Key 0"
+    touch_threshold: 12
+    release_threshold: 6

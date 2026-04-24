@@ -1,0 +1,62 @@
+esphome:
+  name: "c3supermini"
+  friendly_name: C3Supermini
+  min_version: 2025.9.0
+  name_add_mac_suffix: false
+
+esp32:
+  variant: esp32c3
+  board: nologo_esp32c3_super_mini
+  framework:
+    type: esp-idf
+
+api:
+    batch_delay: 30ms
+ota:
+  - platform: esphome
+
+logger:
+  level: DEBUG
+  logs:
+    remote_receiver: DEBUG
+
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+
+spi:      # define SPI bus for RC522
+  clk_pin: 2
+  miso_pin: 21
+  mosi_pin: 20
+
+rc522_spi: # configure RC522 to use SPI (hardware default)
+  cs_pin: 10
+  update_interval: 0.1s
+  on_tag:     # when a tag is detected
+    then: 
+      - homeassistant.event:
+          event: esphome.tag_scanned
+          data:
+            tag_id: !lambda |-
+              return x;
+      - text_sensor.template.publish: # write tag ID to a text sensor
+          id: rfid_tag
+          state: !lambda 'return x;'
+  on_tag_removed:
+    then:
+      - text_sensor.template.publish: # clear text sensor when tag is removed
+          id: rfid_tag
+          state: ""
+
+text_sensor:
+  - platform: template
+    name: "RFID Tag ID"
+    id: rfid_tag
+
+binary_sensor:
+  - platform: rc522
+    uid: 0a-a2-ca-80      # check for a specific tag (optional)
+    name: "RC522 RFID Tag"
+

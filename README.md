@@ -4,15 +4,19 @@ Scope of this registry is to provide basic working setup examples for several se
 
 ## ESPHome Recipes
 
+## Binary and Analog I/O
+* Binary Switch and Relais
+* Light Sensing using an LDR
+
 ### RMT based modules
 
 * [IR Receiver and Transmitter Basics](IR-Receive-Transmit/README.md)
-* [RMT-LED-Strip](RMT-LED-Strip/README.md)
+* [RMT-LED-Strip](Addressable-LED-Strip-RMT/README.md)
 
 ### I2C based modules
 
 * [Lidar Distance Sensor](Lidar-Distance/README.md)
-* [Accellerometer and Gyroscope](Accell-Gyro/README.md)
+* [Accellerometer and Gyroscope](Accel-Gyro-MPU6050/README.md)
 * [Capacitive Touch Sensor](CapacitiveTouch-MPR121/README.md)
 
 ### SPI based modules
@@ -20,5 +24,7 @@ Scope of this registry is to provide basic working setup examples for several se
 * [RFID Reader](RFID-Reader/README.md)
 
 ### Miscellaneous modules
-* [DHT11 Temperature and Humidity Senor](Temperature-Humidity-DHT/README.md)
-* [Stepper motor with ULN2003 driver](Stepper-Motor-ULN2003/README.md)
+* [DHT-type Temperature and Humidity Senor](Temperature-Humidity-DHT/README.md)
+* [Media Player and I2S Audio](MediaPlayer-I2S-Audio/README.md)
+* Servo Motor
+* Stepper motor with ULN2003 driver(Stepper-Motor-ULN2003/README.md)
