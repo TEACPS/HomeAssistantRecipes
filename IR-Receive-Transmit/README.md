@@ -13,7 +13,7 @@ See also:  [Original remote receiver docs](https://esphome.io/components/remote_
 
 ## Get to know your remote
 
-Different vendors use various command protocols for IR remotes. Luckily, most of them are known and can be decoded easily to listen for them, or later send our own commands.
+Different vendors use various command protocols for IR remotes. Luckily, most of them are known and can be decoded easily. We can listen for them to control something in HA using the remote or later replicate them and send our own commands. Using an IR receiver module known as *KY-22* we can receive the IR pulses from most regular remote controls.
 
 ### Setup
 
@@ -25,7 +25,7 @@ Your module has 3 pins. Connect them as follows
 ### ESPHome config
 Connect as stated above and then configure like shown here:  
 
-```
+```yaml
 remote_receiver:
   pin: 
     number: GPIO5
@@ -42,7 +42,7 @@ When pressing any button on your IR remote control close to the sensor, you shou
 Now look at the LOGs output in ESPHome Dashboard to see what we actually received.
 
 
-```
+```log
 [21:28:09.763][I][remote.pronto:240]: 0000 006D 000D 0000 005B 001A 002B 001A 0014 001A 002B 001A 0014 001A 002B 001A 0014 001A 0016 0018 002D 0018 0014 001A 0014 001A 0014 001A 0014 0181 
 [21:28:09.767][I][remote.sony:065]: Received Sony: data=0x00000A90, nbits=12
 ```
@@ -72,7 +72,7 @@ binary_sensor:
 ```
 
 Log output now looks like this
-```
+```log
 [22:05:19.569][D][binary_sensor:048]: 'Remote Button Power' >> ON
 [22:05:19.572][I][remote.sony:065]: Received Sony: data=0x00000A90, nbits=12
 [22:05:19.624][I][remote.sony:065]: Received Sony: data=0x00000A90, nbits=12
@@ -85,7 +85,7 @@ In Home Assistant we now have a button that is triggered when we send a remote c
 #### Note
 Different IR remotes might have different expected formats. Here is another example of this generic remote (with `dump: all`):
 
-```
+```log
 [22:11:28.627][I][remote.jvc:049]: Received JVC: data=0x00FF
 [22:11:28.629][I][remote.lg:054]: Received LG: data=0x00FF02FD, nbits=32
 [22:11:28.635][I][remote.nec:097]: Received NEC: address=0xFF00, command=0xBF40 command_repeats=1

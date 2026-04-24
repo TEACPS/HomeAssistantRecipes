@@ -1,0 +1,182 @@
+esphome:
+  name: c3supermini-02
+  friendly_name: C3Supermini_02
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "Xd2zjd3ikqgEIZY6Uv4LirdDgCbr6ajzSUwqlAlRAbQ="
+
+ota:
+  - platform: esphome
+    password: "1ef60a1b4c59b7721d8447c3e47d86b2"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "C3Supermini-02 Fallback Hotspot"
+    password: "7HGKhD7uFlRq"
+
+captive_portal:
+    
+
+# switch:
+#   - platform: gpio
+#     name: "Relay Switch"
+#     pin: GPIO0
+#     id: relay_switch
+#     restore_mode: RESTORE_DEFAULT_OFF
+
+
+# sensor:
+#   - platform: adc
+#     pin: GPIO2
+#     id: ldr_raw
+#     attenuation: 11db
+#     update_interval: 1s
+#     name: "ambient light raw"
+
+#   - platform: template
+#     name: "Ambient Light"
+#     unit_of_measurement: "%"
+#     icon: mdi:weather-sunny
+#     update_interval: 1s
+#     lambda: |-
+#       // Adjust these values to your environment
+#       float min_raw = 2.8;   // dark
+#       float max_raw = 0.2;   // bright
+
+#       float value = (id(ldr_raw).state - min_raw) / (max_raw - min_raw);
+#       value = clamp(value, 0.0f, 1.0f);
+#       return value * 100.0;
+  
+#   - platform: adc
+#     pin: GPIO4
+#     id: ir_reflex_raw
+#     attenuation: 11db
+#     update_interval: 1s
+#     name: "ir reflector raw"
+
+
+remote_receiver:
+  pin: 
+    number: GPIO5
+    # sony remote needed this
+    inverted: True
+  dump: all
+
+binary_sensor:
+
+  - platform: remote_receiver
+    name: "Sony Remote Button Power"       # → binary_sensor.ir_receiver_remote_button_1
+    id: btn_1
+    filters:
+      - delayed_off: 200ms        # Stay ON for 200ms after signal
+    sony:
+      nbits: 12 
+      data: 0xA90
+
+  - platform: remote_receiver
+    name: "Generic Remote Button Power"
+    id: btn_2
+    filters:
+      - delayed_off: 200ms        # Stay ON for 200ms after signal
+    nec:
+      address: 0xFF00
+      command: 0xBF40
+
+remote_transmitter:
+  pin: GPIO6
+  carrier_duty_percent: 50%
+
+
+button:
+  - platform: template
+    name: "Sony Power"
+    on_press:
+      - repeat:
+          count: 8
+          then: 
+          - remote_transmitter.transmit_sony:
+              data: 0xA90
+              nbits: 12
+          - delay: 40ms
+
+  - platform: template
+    name: "Sony Volume Up"
+    on_press:
+      - remote_transmitter.transmit_sony:
+          data: 0x290
+          nbits: 12
+
+  - platform: template
+    name: "Sony Volume Down"
+    on_press:
+      - remote_transmitter.transmit_sony:
+          data: 0xC90
+          nbits: 12
+
+
+
+# light:
+# # The RMT-driven addressable LED strip
+# # interferes with IR transmitter!
+
+#   - platform: esp32_rmt_led_strip
+#     chipset: WS2812       # Choose your actual chipset: WS2812/WS2812B/SK6812
+#     pin: GPIO1            # Use a safe data pin; avoid GPIO0
+#     num_leds: 14          # <-- Set to your strip length
+#     rgb_order: GRB        # Common for WS2812(B)
+#     #rmt_channel: 0        # 0–7 on ESP32; use a free channel
+#     id: my_rmt_strip
+#     name: "My RMT LED Strip"
+#     restore_mode: ALWAYS_OFF   # Optional: start off after boot
+#     #use_dma: True
+
+#     # Some built-in effects for testing
+#     effects:
+#       - addressable_rainbow:
+#           name: "Rainbow"
+#           speed: 20
+#           width: 14
+
+#       - addressable_color_wipe:
+#           name: "Color Wipe White"
+#           colors:
+#             - red: 100%
+#               green: 100%
+#               blue: 100%
+#               num_leds: 5
+#               gradient: true
+#             - red: 20%
+#               green: 0%
+#               blue: 0%
+#               num_leds: 5
+#           add_led_interval: 50ms
+#           reverse: false
+      
+#       - e131: 
+#           universe: 1
+#           channels: RGB
+      
+
+#     # Power-on effect (runs on boot)
+#     on_turn_on:
+#       - light.turn_on:
+#           id: my_rmt_strip
+#           brightness: 50%
+#           effect: "Rainbow"
+
+# e131:
+#   method: UNICAST
