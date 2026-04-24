@@ -133,15 +133,12 @@ As you can see, NEC requires a different configuration to Sony.
 
 Here it how it looks like on the Home Assistant side:
 
-![Home Assistant Entity for power button](images/ha_ir_binary_sensor.png)
-
-ToDo: ![KY-22 IR Remote Sensor wired up connected to GPIO5 on the ESP32 C3 Supermini]()
+![Home Assistant Entity for power button](media/ha_ir_binary_sensor.png)
 
 ##  Adding an IR Sender
 For IR control of devices using Home Assistant (e.g. for turning on a TV from HA) we need an IR transmitting diode module.
 
 See also: [Original IR Transmitter docs](https://esphome.io/components/remote_transmitter/)
-
 
 ### Setup
 
