@@ -26,5 +26,5 @@ Scope of this registry is to provide basic working setup examples for several se
 ### Miscellaneous modules
 * [DHT-type Temperature and Humidity Senor](Temperature-Humidity-DHT/README.md)
 * [Media Player and I2S Audio](MediaPlayer-I2S-Audio/README.md)
-* Servo Motor
-* Stepper motor with ULN2003 driver(Stepper-Motor-ULN2003/README.md)
+* Coming soon: Servo Motor
+* Optional: Stepper motor with ULN2003 driver(Stepper-Motor-ULN2003/README.md)

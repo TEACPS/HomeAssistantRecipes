@@ -2,7 +2,7 @@
 
 A neat feature of the HA and ESPHome environment is audio playback directly from the chip. The media player framework allows for playing back from different sources like web-radios or even short audio snippets stored on the ESP directly (not demoed here).
 
-Here we'll use an I2S audio amplifier chip to drive a little speaker and playback a webstream. *I2S* is a serial protocol for audio streams among chips. The ESP32 generates this audio stream and using I2S it is transmitted to the amplifier, where it is made audible.
+Here we'll use an I2S audio amplifier (based on the MAX98357A chip) to drive a little speaker and playback a webstream. *I2S* is a serial protocol for audio streams among chips. The ESP32 generates this audio stream and using I2S it is transmitted to the amplifier, where it is made audible.
 
 ![Setup with I2S amplifier module and speaker](media/i2s-audio-connected-top.jpg)
 
@@ -29,7 +29,7 @@ Apart from the power connection, we need to setup I2S, which requires 3 lines: `
 
 ## Configuration
 
-The `media_player` component requires the `speaker` component, which itself requires the `i2s` component to be setup.
+The `media_player` component requires the `speaker` component, which itself requires the `i2s_audio` component to be setup.
 
 ```yaml
 i2s_audio:
@@ -73,7 +73,7 @@ Choose your esp from the playback targets. Then, select any webradio channel fro
 
 After hitting play, playback should start on your speaker. 
 
-Note: The stream is not directly routed to the ESP from online, but rather received on HA, transcoded to the FLAC format (as configured above with `format: FLAC`) and then streamed. 
+Note: The stream is not directly routed to the ESP from online, but rather received on the Raspberry Pi running Home Assistant, transcoded to the FLAC format (as configured above with `format: FLAC`) and then streamed to the ESP. 
 
 ### Making an TTS-announcement
 Navigate back to your media sources and choose the Text-to-speech category.
